@@ -33,5 +33,15 @@ def mark_attendance(student_id):
     db.session.commit()
     return redirect(url_for('index'))
 
+@app.route('/attendance')
+def view_attendance():
+    attendance = Attendance.query.all()
+    data = [
+        {'student_id': a.student_id, 'date': a.date, 'status': a.status}
+        for a in attendance
+    ]
+    return {'attendance': data}
+
+
 if __name__ == '__main__':
     app.run(debug=True)
