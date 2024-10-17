@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+</head>
+<body>
+    <h1>Student List</h1>
+    <form action="/add-student" method="POST">
+        <input type="text" name="name" placeholder="Student Name" required>
+        <input type="text" name="class" placeholder="Class" required>
+        <input type="email" name="email" placeholder="Email">
+        <button type="submit">Add Student</button>
+    </form>
+
+    <ul>
+        {% for student in students %}
+            <li>{{ student.name }} ({{ student.class_name }})
+                <form action="/mark-attendance/{{ student.id }}" method="POST">
+                    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+                    <select name="status">
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                    <button type="submit">Mark Attendance</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
