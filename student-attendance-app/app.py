@@ -5,8 +5,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
-@app.before_first_request
-def create_tables():
+# Create tables before the first request
+with app.app_context():
     db.create_all()
 
 @app.route('/')
